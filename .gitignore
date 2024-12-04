@@ -1,9 +1,6 @@
-env/
-__pycache__/
-.ipynb_checkpoints/
+.venv/
+.env
 *.pyc
-*.pyo
-*.log
-data/
-models/
-outputs/
+__pycache__/
+Pipfile.lock
+.DS_Store
