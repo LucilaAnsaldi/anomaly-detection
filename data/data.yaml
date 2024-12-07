@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['print']
+
+roboflow:
+  workspace: lucila-5v9zn
+  project: anomaly-detection-b36as
+  version: 1
+  license: Public Domain
+  url: https://universe.roboflow.com/lucila-5v9zn/anomaly-detection-b36as/dataset/1
