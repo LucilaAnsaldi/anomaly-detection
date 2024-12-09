@@ -21,19 +21,19 @@ def train_autoencoder(cropped_correct_frames: List[str], model_path: str, input_
 
     images = np.array(images)
 
-    input_layer = tf.layers.Input(shape=input_shape)
-    encoded = tf.layers.Conv2D(32, (3, 3), activation='relu', padding='same')(input_layer)
-    encoded = tf.layers.MaxPooling2D((2, 2), padding='same')(encoded)
-    encoded = tf.layers.Conv2D(16, (3, 3), activation='relu', padding='same')(encoded)
-    encoded = tf.layers.MaxPooling2D((2, 2), padding='same')(encoded)
+    input_layer = tf.keras.layers.Input(shape=input_shape)
+    encoded = tf.keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same')(input_layer)
+    encoded = tf.keras.layers.MaxPooling2D((2, 2), padding='same')(encoded)
+    encoded = tf.keras.layers.Conv2D(16, (3, 3), activation='relu', padding='same')(encoded)
+    encoded = tf.keras.layers.MaxPooling2D((2, 2), padding='same')(encoded)
 
-    decoded = tf.layers.Conv2D(16, (3, 3), activation='relu', padding='same')(encoded)
-    decoded = tf.layers.UpSampling2D((2, 2))(decoded)
-    decoded = tf.layers.Conv2D(32, (3, 3), activation='relu', padding='same')(decoded)
-    decoded = tf.layers.UpSampling2D((2, 2))(decoded)
-    output_layer = tf.layers.Conv2D(3, (3, 3), activation='sigmoid', padding='same')(decoded)
+    decoded = tf.keras.layers.Conv2D(16, (3, 3), activation='relu', padding='same')(encoded)
+    decoded = tf.keras.layers.UpSampling2D((2, 2))(decoded)
+    decoded = tf.keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same')(decoded)
+    decoded = tf.keras.layers.UpSampling2D((2, 2))(decoded)
+    output_layer = tf.keras.layers.Conv2D(3, (3, 3), activation='sigmoid', padding='same')(decoded)
 
-    autoencoder = tf.models.Model(inputs=input_layer, outputs=output_layer)
+    autoencoder = tf.keras.models.Model(inputs=input_layer, outputs=output_layer)
     autoencoder.compile(optimizer='adam', loss='mse')
 
     autoencoder.fit(images, images, epochs=50, batch_size=16, validation_split=0.2)
